@@ -1,0 +1,13 @@
+#Arquivo nginx-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-svc-web
+  labels:
+    env: duarte
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    env: duarte
