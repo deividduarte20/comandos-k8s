@@ -5,6 +5,14 @@
 | kubectl | eksctl |
 |---------|--------|
 
+## Para instalar o eksctl acesse o link:
+
+https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html
+
+## Para instalar o kubectl acesse o link:
+
+https://kubernetes.io/docs/tasks/tools/
+
 # Criar Cluster EKS
 eksctl create cluster --name duarte --version 1.22 --region us-east-1 --nodegroup-name workers --node-type t2.micro --nodes 2 --nodes-min 1 --nodes-max 3 --managed
 
