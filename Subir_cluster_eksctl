@@ -1,0 +1,63 @@
+#Cria Cluster EKS
+eksctl create cluster --name duarte --version 1.17 --region us-east-1 --nodegroup-name workers --node-type t2.micro --nodes 2 --nodes-min 1 --nodes-max 3 --managed
+
+#Habilita conexao no Cluster
+aws eks update-kubeconfig --name duarte --region us-east-1
+
+#Arquivo nginx-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-svc
+  labels:
+    env: webfor
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    env: webfor
+	
+	
+#Arquivo nginx-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    env: webfor
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      env: webfor
+  template:
+    metadata:
+      labels:
+        env: webfor
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+
+
+#Cria o servico
+kubectl apply -f ./nginx-svc.yaml
+
+#Verifica o status do servico
+kubectl get service
+
+#Cria o Deployment
+kubectl apply -f ./nginx-deployment.yaml
+
+#Verifica o status do Deployment
+kubectl get deployment
+
+#Verifica o status dos nodes
+kubectl get node
+
+#Verifica o status dos pods
+kubectl get pod
+
