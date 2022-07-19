@@ -16,6 +16,7 @@ export KUBECONFIG=config
 kubectl get nodes
 
 #Arquivo nginx-svc.yaml
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -30,6 +31,7 @@ spec:
     env: app-duarte
 		
 #Arquivo nginx-deployment.yaml
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
