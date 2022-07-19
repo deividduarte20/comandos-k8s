@@ -2,8 +2,8 @@
 
 # Requisitos
 
-| kubectl | eksctl |
-|---------|--------|
+| kubectl | eksctl | aws cli |
+|---------|--------|---------|
 
 ## Para instalar o eksctl acesse o link:
 
