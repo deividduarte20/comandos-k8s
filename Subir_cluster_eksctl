@@ -6,10 +6,7 @@ aws eks --region us-east-1 update-kubeconfig --name meu-cluster
 export KUBECONFIG=config
 
 ## Checando o cluster
-
 kubectl get nodes
-## Terminou o teste ? Bora derrubar tudo!
-eksctl delete cluster meu-cluster
 
 #Arquivo nginx-svc.yaml
 apiVersion: v1
@@ -67,3 +64,5 @@ kubectl get node
 ## Verifica o status dos pods
 kubectl get pods
 
+## Terminou o teste ? Bora derrubar tudo!
+eksctl delete cluster meu-cluster
