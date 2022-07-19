@@ -10,35 +10,35 @@ kind: Service
 metadata:
   name: nginx-svc
   labels:
-    env: webfor
+    env: app-duarte
 spec:
   type: LoadBalancer
   ports:
   - port: 80
   selector:
-    env: webfor
+    env: app-duarte
 	
 	
 #Arquivo nginx-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: deployment-web
   labels:
     env: webfor
 spec:
   replicas: 3
   selector:
     matchLabels:
-      env: webfor
+      env: app-deploy
   template:
     metadata:
       labels:
-        env: webfor
+        env: app-deploy
     spec:
       containers:
-      - name: nginx
-        image: nginx
+      - name: app-web
+        image: deividdua32/web-app:latest
         ports:
         - containerPort: 80
 
