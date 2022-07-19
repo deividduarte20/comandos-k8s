@@ -1,0 +1,107 @@
+## Autor: Deivid Duarte
+## Lista de comandos usados no kubernetes
+
+# Informações do cluster
+kubectl cluster-info
+
+# Consultar todos os pods e namespaces
+kubectl get all --all-namespaces
+
+# Criar namespace
+kubectl create namespace nome_namespace
+
+# Consultar pods em um namespace
+kubectl get pods -n nome_namespace
+
+# Subir pod manualmente
+kubectl run nome_aplicacao_sua_escolha --image=nginx
+
+# Subir pod em um namespace
+kubectl run nome_aplicacao_sua_escolha --namespace=nome_nasmespace --image=nginx 
+
+# Deletar pod
+kubectl delete pod nome_pod
+
+# Consultar detalhes de pod
+kubectl describe pod nome_pod
+
+# Consultar detalhes de pod em um namespace
+kubectl describe pod app-girlene -n namespace
+
+# Consultar namespaces
+kubectl get nasmespace
+
+# Deletar namespace
+kubectl delete namespace duarte
+
+# Consultar log de pod
+kubectl logs -f nome_pod
+
+# Criar deploy com 2 replicas
+kubectl create deploy nome_app --image=nginx --replicas=2
+
+# Consultar deploy
+kubectl get deploy
+
+# Deletar deploy
+kubectl delete deploy nome_deploy
+
+# Aumentar número de replicas de deploy
+kubectl scale deploy nome_deploy --replicas=4
+
+# Editar deploy
+kubectl edit deploy nome_deploy
+
+# Criar manifesto de pod
+kubectl run nome_app --image=nginx --port=80 --dry-run=client -o yaml > simples.pod.yaml
+
+# Consultar em qual node o pod está rodando
+kubectl get pods nome_pod -o wide
+
+# Criar simulação de deploy no formato yaml
+kubectl create deploy app-duarte-deploy --image=nginx --port=80 --replicas=2 --dry-run=client -o yaml
+
+# Obter informações do service
+kubectl get services ou kubectl get svc
+
+# expor porta pelo clusterIP (Comunicação interna)
+kubectl expose pod nome_pod --port=80
+
+# Encaminhar porta para porta local do pod
+kubectl port-forward deploy/nome_deploy porta_servico:porta_padrao_pod
+
+# Editar service
+kubectl edit services nome_service
+
+# Acessar container
+kubectl exec -ti nome_container -- bash
+
+# Atualizar imagem
+kubectl set image deploy nome_deploy nginx=nginx:1.14.2 --record
+
+# Fazer rollout de image
+kubectl rollout status deployment/nome_deploy
+
+# Consultar histórico de rollout
+kubectl rollout history deployment/nome_deploy
+
+# Consulta consumo de CPU/memória de pods
+kubectl top pods
+
+# Consulta consumo de CPU/memória de nodes
+kubectl top nodes
+
+# Criar secret
+kubectl create secret generic nome_secret --from-literal=user=deivid --from-literal=pass=123
+
+# Editar secret criada
+kubectl edit secret nome_secret
+
+# Consultar secrets
+kubectl get secrets
+
+
+
+
+
+
