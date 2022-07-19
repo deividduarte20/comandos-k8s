@@ -15,46 +15,6 @@ export KUBECONFIG=config
 ## Checando o cluster
 kubectl get nodes
 
-#Arquivo nginx-svc.yaml
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: nginx-svc
-  labels:
-    env: app-duarte
-spec:
-  type: LoadBalancer
-  ports:
-  - port: 80
-  selector:
-    env: app-duarte
-		
-#Arquivo nginx-deployment.yaml
-
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: deployment-web
-  labels:
-    env: webfor
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      env: app-deploy
-  template:
-    metadata:
-      labels:
-        env: app-deploy
-    spec:
-      containers:
-      - name: app-web
-        image: deividdua32/web-app:latest
-        ports:
-        - containerPort: 80
-
-
 ## Cria o servico
 kubectl apply -f ./nginx-svc.yaml
 
