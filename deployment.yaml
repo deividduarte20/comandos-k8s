@@ -5,7 +5,7 @@ metadata:
   labels:
     env: duarte
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       env: duarte
