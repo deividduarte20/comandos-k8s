@@ -74,7 +74,10 @@ kubectl port-forward deploy/nome_deploy porta_servico:porta_padrao_pod
 kubectl edit services nome_service
 
 # Acessar container
-kubectl exec -ti nome_container -- bash
+kubectl exec -ti nome_container -- bash ou kubectl exec -ti nome_container -- sh
+
+# Executar comando em container por exemplo ver variaveis 
+kubectl exec -ti nome_container -- env
 
 # Atualizar imagem
 kubectl set image deploy nome_deploy nginx=nginx:1.14.2 --record
@@ -100,6 +103,8 @@ kubectl edit secret nome_secret
 # Consultar secrets
 kubectl get secrets
 
+# Copiar arquivo para dentro de pod
+kubectl cp ./nome_arquivo nome_pod:/tmp/
 
 
 
