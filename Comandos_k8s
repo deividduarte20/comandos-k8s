@@ -58,6 +58,9 @@ kubectl run nome_app --image=nginx --port=80 --dry-run=client -o yaml > simples.
 # Consultar em qual node o pod está rodando
 kubectl get pods nome_pod -o wide
 
+# Consultar detalhes do deploy
+kubectl get deployment nome_deploy -o yaml
+
 # Criar simulação de deploy no formato yaml
 kubectl create deploy app-duarte-deploy --image=nginx --port=80 --replicas=2 --dry-run=client -o yaml
 
