@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  Code: Picpay2022
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: simpleapp-cm

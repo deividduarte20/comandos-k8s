@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: simpleapp
+  name: simpleapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simpleapp
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: simpleapp
+    spec:
+      containers:
+      - image: deividdua32/python-desafio
+        name: python-desafio
+        resources: {}
+        envFrom:
+        - configMapRef:
+            name: simpleapp-cm
+status: {}
