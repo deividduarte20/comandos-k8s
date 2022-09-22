@@ -121,5 +121,7 @@ kubectl cp ./nome_arquivo nome_pod:/tmp/
 # Consulta em qual load balancer seu microserviço está alocado
 kubectl get ingress
 
+# Cria variavel de ambiente em um pod
+# kubectl run nome_pod --image nginx --port 80 --env=tier=web --env environment=dev
 
 
