@@ -28,6 +28,9 @@ kubectl describe pod nome_pod
 # Consultar detalhes de pod em um namespace
 kubectl describe pod app-girlene -n namespace
 
+# Criar configmap
+kubectl create cm simple-cm --from-literal=Code=teste --dry-run=client -o yaml > simple-cm.yaml
+
 # Consultar namespaces
 kubectl get nasmespace
 
