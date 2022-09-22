@@ -88,6 +88,9 @@ kubectl exec -ti nome_container -- bash ou kubectl exec -ti nome_container -- sh
 # Executar comando em container por exemplo ver variaveis 
 kubectl exec -ti nome_container -- env
 
+# Testar conexão através do curl (o zero indica localhost)
+curl -v telnet://0:6379
+
 # Atualizar imagem
 kubectl set image deploy nome_deploy nginx=nginx:1.14.2 --record
 
