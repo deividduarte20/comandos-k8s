@@ -7,6 +7,9 @@ kubectl cluster-info
 # Consultar todos os pods e namespaces
 kubectl get all --all-namespaces
 
+# Listar apenas nomes dos pods e redirecionando para arquivo
+kubectl get pods -o name > /tmp/pods
+
 # Criar namespace
 kubectl create namespace nome_namespace
 
