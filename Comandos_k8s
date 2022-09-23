@@ -34,6 +34,12 @@ kubectl describe pod app-girlene -n namespace
 # Criar configmap
 kubectl create cm simple-cm --from-literal=Code=teste --dry-run=client -o yaml > simple-cm.yaml
 
+# Cria pod executando comando
+kubectl run nome_pod --image busybox -- sleep 3600
+
+# Deleta todos os pods do namespace default
+kubectl delete --all pod -n default
+
 # Consultar namespaces
 kubectl get nasmespace
 
