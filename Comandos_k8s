@@ -34,6 +34,9 @@ kubectl describe pod app-girlene -n namespace
 # Criar configmap
 kubectl create cm simple-cm --from-literal=Code=teste --dry-run=client -o yaml > simple-cm.yaml
 
+# Criar service ClusterIP
+kubectl expose pod nginx --name=sv2 --type=ClusterIP --port=80 --target-port=80 --dry-run=client -o yaml
+
 # Consultar labels de depoyment
 kubectl get deploy nome_deploy --show-labels
 
