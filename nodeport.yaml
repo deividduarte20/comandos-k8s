@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: meu-servico
+spec:
+  type: NodePort
+  selector:
+    run: nginx
+  ports:
+  - port: 8080 # porta do servico
+    targetPort: 80
+    nodePort: 30080
+    name: http
+  - port: 8080 # porta do servico
+    targetPort: 80
+    nodePort: 300100
+    name: https
