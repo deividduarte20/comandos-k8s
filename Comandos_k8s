@@ -64,6 +64,9 @@ kubectl create deploy nome_app --image=nginx --replicas=2
 # Consultar deploy
 kubectl get deploy
 
+# Alterar imagem do deploy
+kubectl set image deploy nome-deploy nome-container=novo-nome-image-docker --record
+
 # Deletar deploy
 kubectl delete deploy nome_deploy
 
