@@ -70,11 +70,14 @@ kubectl set image deploy nome-deploy nome-container=novo-nome-image-docker --rec
 # Deletar deploy
 kubectl delete deploy nome_deploy
 
-# Aumentar número de replicas de deploy
+# Aumentar ou diminuir o número de replicas de deploy
 kubectl scale deploy nome_deploy --replicas=4
 
 # Editar deploy
 kubectl edit deploy nome_deploy
+
+# Restartar deploy
+kubectl rollout restart deploy nome-deploy
 
 # Criar manifesto de pod
 kubectl run nome_app --image=nginx --port=80 --dry-run=client -o yaml > simples.pod.yaml
