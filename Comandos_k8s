@@ -121,6 +121,9 @@ kubectl rollout history deployment/nome_deploy
 # Efetuar rollout de deployment
 Kubectl rollout undo deployment nome_deploy —to-revision=numero
 
+# Efetuar rollout de deployment sem necessidade de colocar revisão no comando
+Kubectl rollout undo deployment nome_deploy 
+
 # Consulta consumo de CPU/memória de pods
 kubectl top pods
 
