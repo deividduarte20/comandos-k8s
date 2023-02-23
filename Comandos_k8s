@@ -19,6 +19,9 @@ kubectl get pods -n nome_namespace
 # Consultar pods filtrando label e removendo cabeçalho
 kubectl get pods --selector env=dev --no-headers | wc -l
 
+# Consultar pods filtrando por várias labels
+kubectl get pods --selector env=dev,bu=finance,tier=frontend
+
 # Subir pod manualmente
 kubectl run nome_aplicacao_sua_escolha --image=nginx
 
