@@ -157,4 +157,9 @@ kubectl get ingress
 # Cria variavel de ambiente em um pod
 # kubectl run nome_pod --image nginx --port 80 --env=tier=web --env environment=dev
 
+# Criar label no namespace:
+kubectl label namespace ms-app key=valor
+
+# Consultar label de namespace
+kubectl get ns ms-sre-app-pj -o jsonpath='{.metadata.labels}' | grep team
 
