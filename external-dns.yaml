@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: external-dns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: external-dns
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: external-dns
+    spec:
+      containers:
+      - name: external-dns
+        image: registry.k8s.io/external-dns/external-dns:v0.13.4
+        args:
+        - --source=service # ingress is also possible
+        - --domain-filter=domain.com # Insira o seu dominio
+        - --provider=digitalocean # Substitua o provider
+        env:
+        - name: DO_TOKEN
+          value: "dop_v1_e14156972b597e9bd116086df9ea07ca836e6be4f020161923e36094a2af5bff"
