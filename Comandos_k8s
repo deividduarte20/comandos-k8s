@@ -85,6 +85,24 @@ kubectl edit deploy nome_deploy
 # Restartar deploy
 kubectl rollout restart deploy nome-deploy
 
+# Consultar status do deploy
+kubectl rollout status nome_deployment
+
+# Consultar histórico de rollout
+kubectl rollout history deployment/nome_deploy
+
+# Consultar conteúdo da revisão
+kubectl rollout history deploy/nome-deploy --revision=numero
+
+# Efetuar rollout para versão anterior
+Kubectl rollout undo deployment nome_deploy
+
+# Efetuar rollout de deployment para versão especifica de revisão
+Kubectl rollout undo deployment nome_deploy --to-revision=numero
+
+# Efetuar rollout de deployment sem necessidade de colocar revisão no comando
+Kubectl rollout undo deployment nome_deploy
+
 # Criar manifesto de pod
 kubectl run nome_app --image=nginx --port=80 --dry-run=client -o yaml > simples.pod.yaml
 
@@ -118,20 +136,8 @@ kubectl exec -ti nome_container -- env
 # Testar conexão através do curl (o zero indica localhost)
 curl -v telnet://0:6379
 
-# Atualizar imagem
+# Atualizar imagem (Comando --record está depreciado)
 kubectl set image deploy nome_deploy nginx=nginx:1.14.2 --record
-
-# Fazer rollout de image
-kubectl rollout status deployment/nome_deploy
-
-# Consultar histórico de rollout
-kubectl rollout history deployment/nome_deploy
-
-# Efetuar rollout de deployment
-Kubectl rollout undo deployment nome_deploy —to-revision=numero
-
-# Efetuar rollout de deployment sem necessidade de colocar revisão no comando
-Kubectl rollout undo deployment nome_deploy 
 
 # Consulta consumo de CPU/memória de pods
 kubectl top pods
