@@ -103,6 +103,9 @@ Kubectl rollout undo deployment nome_deploy --to-revision=numero
 # Efetuar rollout de deployment sem necessidade de colocar revisão no comando
 Kubectl rollout undo deployment nome_deploy
 
+# Pausa deploy
+kubectl rollout pause deploy/nome_deployment
+
 # Criar manifesto de pod
 kubectl run nome_app --image=nginx --port=80 --dry-run=client -o yaml > simples.pod.yaml
 
