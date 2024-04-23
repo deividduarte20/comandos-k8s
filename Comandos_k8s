@@ -16,6 +16,9 @@ kubectl create namespace nome_namespace
 # Consultar pods em um namespace
 kubectl get pods -n nome_namespace
 
+# Mudar de contexto (Entrar em uma namespace)
+kubectl config set-context --current --namespace=nome_namespace
+
 # Consultar pods filtrando label e removendo cabeçalho
 kubectl get pods --selector env=dev --no-headers | wc -l
 
