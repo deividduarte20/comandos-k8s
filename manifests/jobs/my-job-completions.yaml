@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: my-job
+spec:
+  completions: 5
+  completionMode: "Indexed"
+  template:
+    metadata:
+      name: my-job-pod
+    spec:
+      containers:
+      - name: my-container-busybox
+        image: busybox
+        command:
+        - "/bin/sh"
+        - "-c"
+        - "for i in 1 2; do echo Lucky number $i = $((1 + RANDOM % 70)); done"
+      restartPolicy: Never

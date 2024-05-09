@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-cm-vol
+spec:
+  containers:
+    - name: my-container
+      image: nginx
+      envFrom:
+        - configMapRef:
+            name: my-cm
+      volumeMounts:
+        - name: my-vol
+          mountPath: /etc/my-vol
+          readOnly: true
+
+  volumes:
+    - name: my-vol
+      configMap:
+        name: my-cm
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-cm
+data:
+  # Connection database config
+  my.config.db: |
+    database: mariadb
+    database_uri: mariadb://localhost:3306
+
+  #User interface
+  font.title: Arial
+  background.color: red
+  theme.1: clean
+  theme.2: dark

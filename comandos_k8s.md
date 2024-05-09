@@ -4,6 +4,9 @@
 # Informações do cluster
 kubectl cluster-info
 
+# Imprimir informações de api suportadas no cluster 
+kubectl api-resources
+
 # Consultar todos os pods e namespaces
 kubectl get all --all-namespaces
 
@@ -15,6 +18,18 @@ kubectl create namespace nome_namespace
 
 # Consultar pods em um namespace
 kubectl get pods -n nome_namespace
+
+# Consultar pods por node
+kubectl get pods -o wide --field-selector spec.nodeName=nome-node
+
+# Consultar labels dos nodes
+kubectl get nodes --show-labels
+
+# Adicionar label em node
+kubectl label nodes nome-node env=dev
+
+# Remover label em node
+kubectl label nodes nome-node env-
 
 # Mudar de contexto (Entrar em uma namespace)
 kubectl config set-context --current --namespace=nome_namespace
@@ -31,6 +46,9 @@ kubectl run nome_aplicacao_sua_escolha --image=nginx
 # Subir pod em um namespace
 kubectl run nome_aplicacao_sua_escolha --namespace=nome_nasmespace --image=nginx 
 
+# Subir pod e com acesso ao pod com shell bash
+kubectl run -ti nome_pod --image=debian bash 
+
 # Deletar pod
 kubectl delete pod nome_pod
 
@@ -43,10 +61,13 @@ kubectl describe pod app-girlene -n namespace
 # Criar configmap
 kubectl create cm simple-cm --from-literal=Code=teste --dry-run=client -o yaml > simple-cm.yaml
 
+# Criar configmap com arquivo contendo envs chave/valor (my-app.txt)
+kubectl create cm my-cm --from-file=my-app-file.txt --from-literal=my-description=testingconfigmap/my-cn
+
 # Criar service ClusterIP
 kubectl expose pod nginx --name=sv2 --type=ClusterIP --port=80 --target-port=80 --dry-run=client -o yaml
 
-# Consultar labels de depoyment
+# Consultar labels de deployment
 kubectl get deploy nome_deploy --show-labels
 
 # Consultar replicaset com determinada label
@@ -57,6 +78,9 @@ kubectl run nome_pod --image busybox -- sleep 3600
 
 # Deleta todos os pods do namespace default
 kubectl delete --all pod -n default
+
+# Deleção de DaemonSet com opção de deixar pods orfãos
+kubectl delete daemonset nome-daemonset --cascade=orphan
 
 # Consultar namespaces
 kubectl get nasmespace
@@ -178,3 +202,26 @@ kubectl label namespace ms-app key=valor
 # Consultar label de namespace
 kubectl get ns ms-sre-app-pj -o jsonpath='{.metadata.labels}' | grep team
 
+# Suspender/desativar execução de cronjob
+kubectl patch cronjob nome_cronjob -p '{"spec":{"suspend":true}}'
+
+# Reativar execução de cronjob
+kubectl patch cronjob nome_cronjob -p '{"spec":{"suspend":false}}'
+
+# Alterar policy de PV
+kubectl patch pv nome-pv -p '{"spec": {"persistentVolumeReclaimPolicy":"Retain"}}'
+
+# Deletar todos os persistent volumes claim
+kubectl delete pvc --all
+
+# RBAC - Gerar chave privada em um arquivo (auditor.key)
+openssl genrsa -out auditor.key 2048
+
+# Cria um arquivo de solicitação de assinatura de certificado (CSR - Certificate Signing Request)
+openssl req -new -key auditor.key -out auditor.csr -subj "/CN=auditor/O=My-Company"
+
+# Consulta se temos permissão para executar get pods
+kubectl auth can-i get pods
+
+# Consulta se a permissão é global
+kubectl auth can-i '*' '*' --all-namespaces

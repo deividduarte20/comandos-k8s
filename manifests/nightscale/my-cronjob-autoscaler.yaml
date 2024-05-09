@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nightscale
+  labels:
+    app: kubectl-scaler
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: kubectl-scaler
+  namespace: nightscale
+spec:
+  schedule: "20 19 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: kubectl-scaler
+          containers:
+          - name: kubectl-scaler
+            image: deividdua32/nightscale
+            command: 
+            - "/bin/sh"
+            - "-c"
+            - /app/nightscale.sh
+          restartPolicy: OnFailure
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: kubectl-scaler
+  namespace: nightscale
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: kubectl-scaler-cluster-role
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["get", "list", "watch", "update", "patch"]
+- apiGroups: [""]
+  resources: ["*"]
+  verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: kubectl-scaler-cluster-role-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: kubectl-scaler-cluster-role
+subjects:
+- kind: ServiceAccount
+  name: kubectl-scaler
+  namespace: nightscale
