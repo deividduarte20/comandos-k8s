@@ -21,10 +21,12 @@ https://kubernetes.io/docs/tasks/tools/
 ```
 
 
-# Criar Cluster EKS
+## Criar Cluster EKS
 ```bash
 eksctl create cluster --name duarte --version 1.32 --region us-east-1 --nodegroup-name workers --node-type t3a.medium --nodes 2 --nodes-min 1 --nodes-max 2 --managed
 ```
+
+## **Observação:** Caso ao executar o comando acima apresente não suportado, recomendo reinstalar o eksctl assim atualizando sua versão.
 
 ## Habilita conexao no Cluster
 
