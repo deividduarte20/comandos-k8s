@@ -23,14 +23,13 @@ https://kubernetes.io/docs/tasks/tools/
 
 # Criar Cluster EKS
 ```bash
-eksctl create cluster --name duarte --version 1.27 --region us-east-1 --nodegroup-name workers --node-type t3a.medium --nodes 2 --nodes-min 1 --nodes-max 2 --managed
+eksctl create cluster --name duarte --version 1.32 --region us-east-1 --nodegroup-name workers --node-type t3a.medium --nodes 2 --nodes-min 1 --nodes-max 2 --managed
 ```
 
 ## Habilita conexao no Cluster
 
 ```bash
 aws eks --region us-east-1 update-kubeconfig --name duarte
-export KUBECONFIG=config
 ```
 
 ## Checando o cluster
