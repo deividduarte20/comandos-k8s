@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: webcolor
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: webcolor
+  template:
+    metadata:
+      labels:
+        app: webcolor
+    spec:
+      containers:
+        - name: webcolor
+          image: fabricioveronez/web-color:green
+          ports:
+            - containerPort: 80
+  strategy:
+    canary:
+      steps:
+      - setWeight: 25
+      - pause: {}
+      - setWeight: 50
+      - pause: {}
+      - setWeight: 75
+      - pause: {}
+      - setWeight: 100
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webcolor
+  labels:
+    app: webcolor
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 32523  # Porta fixa no NodePort
+  selector:
+    app: webcolor
